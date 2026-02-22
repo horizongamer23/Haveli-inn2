@@ -12,12 +12,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        /* --- CSS VARIABLES & RESET --- */
         :root {
-            --primary-brown: #5D4037; /* Royal Wood/Leather */
-            --sandstone: #D4A373; /* Jodhpur Stone */
-            --gold: #C5A059; /* Royal Accents */
-            --cream: #FAEDCD; /* Background Light */
+            --primary-brown: #5D4037;
+            --sandstone: #D4A373;
+            --gold: #C5A059;
+            --cream: #FAEDCD;
             --off-white: #FDFBF7;
             --text-dark: #2C1810;
             --text-light: #6D6D6D;
@@ -35,6 +34,330 @@
         body {
             font-family: var(--font-body);
             background-color: var(--off-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; }
+
+        h2 {
+            font-size: 2.5rem;
+            color: var(--primary-brown);
+            text-align: center;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        h2::after {
+            content: ''; display: block; width: 60px; height: 3px;
+            background-color: var(--gold); margin: 10px auto 0;
+        }
+
+        p { color: var(--text-light); }
+
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 15px; }
+        .section-padding { padding: 80px 0; }
+
+        .btn {
+            display: inline-block; padding: 12px 30px;
+            background-color: var(--primary-brown); color: white;
+            text-decoration: none; text-transform: uppercase;
+            letter-spacing: 1px; font-weight: 700; transition: 0.3s;
+            border: 2px solid var(--primary-brown); cursor: pointer;
+        }
+        .btn:hover { background-color: transparent; color: var(--primary-brown); }
+
+        /* --- NAVIGATION (Centered Logo) --- */
+        header {
+            background-color: rgba(253, 251, 247, 0.98);
+            padding: 15px 0; position: fixed; width: 100%; top: 0;
+            z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex; flex-direction: column; align-items: center; gap: 10px;
+        }
+
+        .logo {
+            font-family: var(--font-heading); font-size: 2.2rem;
+            color: var(--primary-brown); font-weight: 700; text-decoration: none;
+            letter-spacing: 2px;
+        }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a {
+            text-decoration: none; color: var(--text-dark);
+            font-weight: 700; text-transform: uppercase;
+            font-size: 0.9rem; transition: 0.3s;
+        }
+        .nav-links a:hover { color: var(--gold); }
+
+        .menu-toggle {
+            display: none; font-size: 1.8rem;
+            color: var(--primary-brown); cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            /* Heritage Haveli background image */
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1599661559875-524bf60061e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80'); 
+            background-size: cover; background-position: center;
+            display: flex; align-items: center; justify-content: center;
+            text-align: center; margin-top: 60px; /* Offset for header */
+        }
+
+        .hero-content h1 { font-size: 3.5rem; color: white; margin-bottom: 20px; }
+        .hero-content p { font-size: 1.4rem; color: var(--cream); margin-bottom: 30px; }
+        .highlight-price { color: var(--gold); font-weight: 700; font-size: 1.6rem; }
+
+        /* --- ROOMS SECTION --- */
+        .rooms-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; margin-top: 40px;
+        }
+        .room-card {
+            background: white; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: transform 0.3s;
+        }
+        .room-card:hover { transform: translateY(-10px); }
+        .room-img { height: 250px; width: 100%; object-fit: cover; }
+        .room-details { padding: 25px; text-align: center; }
+        .room-details h3 { color: var(--primary-brown); margin-bottom: 10px; }
+        .room-price { font-size: 1.2rem; color: var(--gold); font-weight: 700; margin-bottom: 15px; display: block; }
+        .room-features { list-style: none; margin-bottom: 20px; font-size: 0.9rem; color: var(--text-light); text-align: left; padding-left: 20px;}
+        .room-features li { margin-bottom: 5px; }
+
+        /* --- BOOKING FORM --- */
+        #booking { background-color: var(--primary-brown); color: white; text-align: center; }
+        #booking h2 { color: white; }
+        #booking p { color: var(--sandstone); margin-bottom: 30px; }
+        .booking-form {
+            background-color: white; padding: 40px; border-radius: 8px;
+            max-width: 600px; margin: 0 auto; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .form-group { margin-bottom: 20px; text-align: left; }
+        .form-group label { display: block; margin-bottom: 5px; color: var(--text-dark); font-weight: 700; }
+        .form-control { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; font-family: var(--font-body); }
+        .submit-btn { width: 100%; background-color: var(--gold); border: none; padding: 15px; font-weight: 700; color: white; cursor: pointer; font-size: 1.1rem; border-radius: 4px;}
+        .submit-btn:hover { background-color: #b08d4b; }
+
+        /* --- REVIEWS --- */
+        .review-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px; margin-top: 40px;
+        }
+        .review-card {
+            background: white; padding: 30px; border-radius: 8px;
+            border-left: 5px solid var(--gold); box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .stars { color: var(--gold); margin-bottom: 10px; font-size: 1.2rem;}
+        .review-text { font-style: italic; margin-bottom: 15px; color: #444;}
+        .reviewer { font-weight: 700; color: var(--primary-brown); }
+
+        /* --- FOOTER --- */
+        footer { background-color: #2C1810; color: var(--sandstone); padding: 50px 0 20px; text-align: center; }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 768px) {
+            nav { flex-direction: row; justify-content: center; align-items: center; padding: 10px 0;}
+            .menu-toggle { display: block; position: absolute; left: 20px; }
+            .logo { font-size: 1.5rem; }
+            .nav-links {
+                display: none; flex-direction: column; position: absolute;
+                top: 65px; left: 0; background-color: white; width: 100%;
+                text-align: center; padding: 20px 0; box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .hero-content h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="menu-toggle" id="mobile-menu">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <a href="#" class="logo">HAVELI INN</a>
+                <div class="nav-links" id="nav-links">
+                    <a href="#home">Home</a>
+                    <a href="#rooms">Rooms</a>
+                    <a href="#booking">Book Now</a>
+                    <a href="#reviews">Guest Stories</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content container">
+            <h1>Heritage Comfort in the Heart of Jodhpur</h1>
+            <p>Experience royal hospitality with <span class="highlight-price">special rooms starting from ₹999</span>.</p>
+            <a href="#booking" class="btn">Book Your Stay</a>
+        </div>
+    </section>
+
+    <section id="rooms" class="section-padding">
+        <div class="container">
+            <h2>Our Rooms</h2>
+            <div class="rooms-grid">
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Standard Room" class="room-img">
+                    <div class="room-details">
+                        <h3>Standard Room</h3>
+                        <span class="room-price">₹999 / Night</span>
+                        <ul class="room-features">
+                            <li><i class="fas fa-check" style="color:var(--gold);"></i> Cozy Heritage Decor</li>
+                            <li><i class="fas fa-check" style="color:var(--gold);"></i> Free WiFi</li>
+                        </ul>
+                        <a href="#booking" class="btn" onclick="selectRoom('Standard Room')">Book Now</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1590490360182-c33d57733427?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Deluxe Room" class="room-img">
+                    <div class="room-details">
+                        <h3>Deluxe Room</h3>
+                        <span class="room-price">₹1,499 / Night</span>
+                        <ul class="room-features">
+                            <li><i class="fas fa-check" style="color:var(--gold);"></i> Spacious Layout</li>
+                            <li><i class="fas fa-check" style="color:var(--gold);"></i> AC & City View</li>
+                        </ul>
+                        <a href="#booking" class="btn" onclick="selectRoom('Deluxe Room')">Book Now</a>
+                    </div>
+                </div>
+                <div class="room-card">
+                    <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Premium Room" class="room-img">
+                    <div class="room-details">
+                        <h3>Premium Heritage</h3>
+                        <span class="room-price">₹2,199 / Night</span>
+                        <ul class="room-features">
+                            <li><i class="fas fa-check" style="color:var(--gold);"></i> Arch Designs & King Bed</li>
+                            <li><i class="fas fa-check" style="color:var(--gold);"></i> Free Breakfast</li>
+                        </ul>
+                        <a href="#booking" class="btn" onclick="selectRoom('Premium Heritage')">Book Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="section-padding">
+        <div class="container">
+            <h2>Book Your Stay</h2>
+            <p>Send your details directly to our reservation desk via WhatsApp.</p>
+            <form class="booking-form" onsubmit="sendWhatsapp(event)">
+                <div class="form-group">
+                    <label>Full Name</label>
+                    <input type="text" id="name" class="form-control" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="Enter your mobile number" required>
+                </div>
+                <div class="form-group" style="display: flex; gap: 10px;">
+                    <div style="flex:1;">
+                        <label>Check-in</label>
+                        <input type="date" id="checkin" class="form-control" required>
+                    </div>
+                    <div style="flex:1;">
+                        <label>Check-out</label>
+                        <input type="date" id="checkout" class="form-control" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Room Preference</label>
+                    <select id="roomType" class="form-control">
+                        <option value="Standard Room">Standard Room (₹999)</option>
+                        <option value="Deluxe Room">Deluxe Room (₹1,499)</option>
+                        <option value="Premium Heritage">Premium Heritage (₹2,199)</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn"><i class="fab fa-whatsapp"></i> Confirm via WhatsApp</button>
+            </form>
+        </div>
+    </section>
+
+    <section id="reviews" class="section-padding container">
+        <h2>Guest Stories</h2>
+        <div class="review-grid">
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p class="review-text">"An absolute gem in Jodhpur! The ambiance felt so royal, yet the price was incredibly affordable. Will visit again!"</p>
+                <p class="reviewer">- Rahul Sharma, Delhi</p>
+            </div>
+            <div class="review-card">
+                <div class="stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p class="review-text">"The location is perfect, close to the fort. Beautiful heritage property and the rooms are perfectly clean."</p>
+                <p class="reviewer">- Amit Verma, Jaipur</p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <p style="color: white; font-size: 1.2rem; font-family: var(--font-heading); margin-bottom: 10px;">Haveli Inn Jodhpur</p>
+            <p>Near Clock Tower, Old City, Jodhpur, Rajasthan</p>
+            <p style="margin-top: 20px;">&copy; 2026 Haveli Inn Jodhpur. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Logic
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        const navItems = document.querySelectorAll('.nav-links a');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when a tab is clicked
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Pre-select room
+        function selectRoom(roomName) {
+            document.getElementById('roomType').value = roomName;
+        }
+
+        // WhatsApp Logic
+        function sendWhatsapp(e) {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const phone = document.getElementById('phone').value;
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const roomType = document.getElementById('roomType').value;
+
+            const message = `Hello Haveli Inn,%0A%0AI would like to book a stay.%0A%0A*Name:* ${name}%0A*Phone:* ${phone}%0A*Check-in:* ${checkin}%0A*Check-out:* ${checkout}%0A*Room Type:* ${roomType}%0A%0APlease confirm availability.`;
+
+            // Updated with your provided number
+            const whatsappNumber = "7357758460"; 
+            
+            const url = `https://wa.me/${whatsappNumber}?text=${message}`;
+            
+            // Redirects to WhatsApp
+            window.location.href = url;
+        }
+    </script>
+</body>
+</html>            background-color: var(--off-white);
             color: var(--text-dark);
             line-height: 1.6;
             overflow-x: hidden;
